@@ -8,4 +8,4 @@ shopt -s extglob
 #  esac
 #done
 
-docker build -t unixelias/Limesurvey:dev docker/dev
+docker build -t unixelias/Limesurvey:0.0.1-dev docker/dev
