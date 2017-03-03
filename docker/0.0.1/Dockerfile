@@ -4,8 +4,7 @@ LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
       Version="0.0.1" \
       Architecture="x86_64"
 
-RUN apt-get update \
-	&& apt-get upgrade -q -y \
+RUN apt-get update && apt-get upgrade -q -y \
 	&& apt-get install -q -y wget curl php5-gd php5-ldap php5-imap sendmail \
 	&& apt-get clean \
 	&& php5enmod imap
