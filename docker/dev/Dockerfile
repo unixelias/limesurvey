@@ -1,5 +1,4 @@
-FROM tutum/apache-php
-
+FROM tutum/lamp
 
 MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \

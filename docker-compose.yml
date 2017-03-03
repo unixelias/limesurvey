@@ -3,21 +3,16 @@ services:
   limesurvey:
     ports:
       - "8085:80"
-    links:
-      - db
-    volumes:
-      - upload:/app/upload
-    image:
-      unixelias/limesurvey:dev
-  db:
-    image: mysql
     volumes:
       - mysql:/var/lib/mysql
+      - upload:/app/upload
     environment:
-    MYSQL_ROOT_PASSWORD: my-secret-pw
-    MYSQL_DATABASE: lamp
-    MYSQL_USER: user
-    MYSQL_PASSWORD: passwd
+      - MYSQL_ROOT_PASSWORD = toor
+      - MYSQL_DATABASE = lamp
+      - MYSQL_USER = user
+      - MYSQL_PASSWORD = passwd
+    image:
+      unixelias/limesurvey:dev
 
 volumes:
   mysql:
