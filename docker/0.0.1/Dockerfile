@@ -1,17 +1,22 @@
 FROM tutum/lamp
+
+
 MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
-LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
+LABEL Name="Modelo LimeSurvey para implementaÃ§Ã£o no Portal da UFVJM" \
       Version="0.0.1" \
       Architecture="x86_64"
 
-RUN apt-get update && apt-get upgrade -q -y \
-	&& apt-get install -q -y wget curl php5-gd php5-ldap php5-imap sendmail \
+RUN apt-get update \
+	&& apt-get upgrade -q -y \
+	&& apt-get install -q -y curl php5-gd php5-ldap php5-imap sendmail \
 	&& apt-get clean \
 	&& php5enmod imap
 
 RUN rm -rf /app
-RUN wget -qO limesurvey.tar.bz2 http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2
-RUN tar -jxf limesurvey.tar.bz2
+
+RUN curl -o limesurvey.tar.bz2 http://download.limesurvey.org/latest-stable-release/limesurvey2.63.1+170305.tar.bz2 \
+	&& tar -jxf limesurvey.tar.bz2
+	
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \
 	&& chown -R www-data:www-data /app
