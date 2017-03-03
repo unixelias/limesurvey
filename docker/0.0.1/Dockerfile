@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -q -y \
 
 RUN rm -rf /app
 RUN wget -qO limesurvey.tar.bz2 http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2
-RUN tar -jxvf limesurvey.tar.bz2
+RUN tar -jxf limesurvey.tar.bz2
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \
 	&& chown -R www-data:www-data /app
