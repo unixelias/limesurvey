@@ -9,12 +9,9 @@ LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
 RUN locale-gen pt_BR \
 	&& locale-gen pt_BR.UTF-8 \
 	&& dpkg-reconfigure locales \
-	&& update-locale LANG=pt_BR.UTF-8	
+	&& update-locale LANG=pt_BR.UTF-8
 	
-ENV LANG pt_BR.UTF-8  
-ENV LANGUAGE pt_BR:en  
-ENV LC_ALL pt_BR.UTF-8  
-
+# Atualizando e instalando dependências
 RUN apt-get update \
 	&& apt-get upgrade -q -y \
 	&& apt-get install -q -y curl php5-gd php5-ldap php5-imap sendmail \
