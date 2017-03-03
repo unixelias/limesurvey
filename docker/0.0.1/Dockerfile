@@ -10,7 +10,7 @@ RUN apt-get update && apt-get upgrade -q -y \
 	&& php5enmod imap
 
 RUN rm -rf /app
-RUN wget -O limesurvey.tar.bz2 http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2
+RUN wget -qO limesurvey.tar.bz2 http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2
 RUN tar -jxvf limesurvey.tar.bz2
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \
