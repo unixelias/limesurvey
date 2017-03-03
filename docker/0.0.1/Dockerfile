@@ -1,5 +1,8 @@
-
 FROM tutum/lamp
+MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
+LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
+      Version="0.0.1" \
+      Architecture="x86_64"
 
 RUN apt-get update \
 	&& apt-get upgrade -q -y \
