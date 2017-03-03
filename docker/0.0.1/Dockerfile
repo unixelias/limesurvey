@@ -1,14 +1,15 @@
 
 FROM tutum/lamp
 
-RUN apt-get update ; \
-	apt-get upgrade -q -y ;\
-	apt-get install -q -y curl php5-gd php5-ldap php5-imap sendmail; \
-	apt-get clean ; \
-	php5enmod imap
+RUN apt-get update
+	&& apt-get upgrade -q -y \
+	&& apt-get install -q -y wget curl php5-gd php5-ldap php5-imap sendmail \
+	&& apt-get clean \
+	&& php5enmod imap
 
 RUN rm -rf /app
-ADD limesurvey.tar.bz2 /
+RUN wget -O limesurvey.tar.bz2 http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2
+RUN tar -jxvf limesurvey.tar.bz2
 RUN mv limesurvey app; \
 	mkdir -p /uploadstruct; \
 	chown -R www-data:www-data /app
