@@ -7,7 +7,7 @@ services:
       - mysql:/var/lib/mysql
       - upload:/app/upload
     image:
-      unixelias/limesurvey:dev
+      unixelias/limesurvey:latest
 volumes:
   mysql:
   upload:
