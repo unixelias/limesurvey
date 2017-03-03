@@ -1,0 +1,17 @@
+language: python
+python: 2.7
+sudo: required
+services:
+- docker
+matrix:
+  fast_finish: true
+before_script:
+- ./linter.sh
+script:
+- ./build.sh
+after_success:
+- ./repo_build.sh
+env:
+  global:
+    secure: ajv432ndd2ynjrgtrv8CFTbgr7rMRdvx7aB0xTt07VldSY1JH5uMgJi1HxcSB/prZWEzd+L+hpKmXmgZBwn+5zlsa/IkGFOyKQEIJXOy9lwVKwJwA/f+d2mVOeZ13bxAFgPd8UxeCq2QMBmNpLawOaCZFr43RgD/3NzlMY7WEX3ERxIGoqQthEBIfbwboL9k+Zsvt0aoQyvnXu18rB4fqSlH6GDuWi4KCKeSegtaR3EDKI69ThyfHHacpTdDrdgSFO1ROqVoBABXNi8wbduTNEeUljsEZDYzS0FYicOosNdu8I5sXz5/OTthjKJCCmoh5MmPbpw791RWe97MYfDq2ZgxuOxcwche8Od56HE250QJdxY5YM/iRy686a6NZOT7mN0lBaMhuWW3j3NnCAwSS16ZQI8qSiph4+/+fHpE8MOH+XkmF3og1doSF+0RTJpUpwZt3Lv9mASJDlthQ1WQ6VS4xofSDnJsm5K/pZpb2AOhVgaHFbJ9tBP0eSV/1zmT/hOApbJlPds11WCaxkuzCg2RuTvzpk4IEWjsxQlex6IXoyhw5U2LwVyDgOnOKzyneRBVmvjVW64kyKL234B5Se4J/kMlPvsGiigAt5iWWWJyApGggRZ9PCOrxjRWP36/z2pOaGVz4PLy/Oqp7lP1sA5GbBEqGnNFL4akmi8x73o=
+

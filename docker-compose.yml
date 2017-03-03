@@ -2,12 +2,12 @@ version: '2'
 services:
   limesurvey:
     ports:
-      - "80:80"
+      - "8085:80"
     volumes:
       - mysql:/var/lib/mysql
       - upload:/app/upload
     image:
-      crramirez/limesurvey:latest
+      unixelias/limesurvey:dev
 volumes:
   mysql:
   upload:
