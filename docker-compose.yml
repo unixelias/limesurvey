@@ -12,7 +12,7 @@ services:
       - MYSQL_USER = user
       - MYSQL_PASSWORD = passwd
     image:
-      unixelias/limesurvey:latest
+      unixelias/limesurvey:dev
 volumes:
   mysql:
   upload:
