@@ -10,7 +10,7 @@ RUN locale-gen pt_BR \
 	&& locale-gen pt_BR.UTF-8 \
 	&& dpkg-reconfigure locales \
 	&& update-locale LANG=pt_BR.UTF-8
-	
+
 # Atualizando e instalando dependências
 RUN apt-get update \
 	&& apt-get upgrade -q -y \
@@ -18,13 +18,13 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& php5enmod imap \
 	&& php5enmod ldap \
-	&& php5enmod curl \
+	&& php5enmod curl
 
 RUN rm -rf /app
 
 RUN curl -o limesurvey.tar.bz2 -L http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2 \
 	&& tar -jxf limesurvey.tar.bz2
-	
+
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \
 	&& chown -R www-data:www-data /app
