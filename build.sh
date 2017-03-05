@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 shopt -s extglob
 
 for i in $( ls docker); do
@@ -8,5 +8,7 @@ for i in $( ls docker); do
   esac
 done
 
+
 #Exclusivo para DEV version
-#docker build -t unixelias/limesurvey:0.0.1-dev docker/dev
+#docker build -t unixelias/limesurvey:dev docker/dev
+
