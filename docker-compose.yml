@@ -6,6 +6,11 @@ services:
     volumes:
       - mysql:/var/lib/mysql
       - upload:/app/upload
+    environment:
+      - MYSQL_ROOT_PASSWORD = toor
+      - MYSQL_DATABASE = lamp
+      - MYSQL_USER = user
+      - MYSQL_PASSWORD = passwd
     image:
       unixelias/limesurvey:latest
 volumes:
