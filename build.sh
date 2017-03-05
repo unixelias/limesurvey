@@ -8,4 +8,7 @@ shopt -s extglob
 #  esac
 #done
 
+
+#Exclusivo para DEV version
 docker build -t unixelias/limesurvey:dev docker/dev
+
