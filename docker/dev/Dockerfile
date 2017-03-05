@@ -14,9 +14,11 @@ RUN locale-gen pt_BR \
 # Atualizando e instalando dependências
 RUN apt-get update \
 	&& apt-get upgrade -q -y \
-	&& apt-get install -q -y curl php5-gd php5-ldap php5-imap sendmail \
+	&& apt-get install -q -y curl php5-gd php5-ldap php5-imap php5-curl sendmail \
 	&& apt-get clean \
-	&& php5enmod imap
+	&& php5enmod imap \
+	&& php5enmod ldap \
+	&& php5enmod curl \
 
 RUN rm -rf /app
 
@@ -32,10 +34,11 @@ RUN cp -r /app/upload/* /uploadstruct \
 
 RUN chown www-data:www-data /var/lib/php5
 
+ADD ldap.php /app/application/config/
 ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
-
 RUN chmod +x /start.sh
+
 
 VOLUME /app/upload
 
