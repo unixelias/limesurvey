@@ -39,8 +39,11 @@ ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
+#Mysql externo
+RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf \
+  && exec supervisord -n
 
 VOLUME /app/upload
 
-EXPOSE 80 3306
+EXPOSE 80
 CMD ["/start.sh"]

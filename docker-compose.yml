@@ -1,18 +1,23 @@
 version: '2'
 services:
+  mysql:
+    image: mysql:latest
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: toor
+
   limesurvey:
+    links:
+      - mysql
     ports:
       - "8085:80"
     volumes:
-      - mysql:/var/lib/mysql
       - upload:/app/upload
-    environment:
-      - MYSQL_ROOT_PASSWORD = toor
-      - MYSQL_DATABASE = lamp
-      - MYSQL_USER = user
-      - MYSQL_PASSWORD = passwd
     image:
       unixelias/limesurvey:dev
+      
 volumes:
   mysql:
   upload:
