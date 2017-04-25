@@ -34,14 +34,14 @@ RUN cp -r /app/upload/* /uploadstruct \
 
 RUN chown www-data:www-data /var/lib/php5
 
+#Mysql externo
+RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf
+
 ADD ldap.php /app/application/config/
 ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
-#Mysql externo
-RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf \
-  && exec supervisord -n
 
 VOLUME /app/upload
 
