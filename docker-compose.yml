@@ -6,7 +6,10 @@ services:
       - mysql:/var/lib/mysql
     restart: always
     environment:
-        MYSQL_ROOT_PASSWORD: toor
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: pesquisas
+      MYSQL_USER: user
+      MYSQL_PASSWORD: senha
 
   limesurvey:
     links:
@@ -17,7 +20,7 @@ services:
       - upload:/app/upload
     image:
       unixelias/limesurvey:dev
-      
+
 volumes:
   mysql:
   upload:

@@ -42,6 +42,7 @@ ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
+RUN chown -R www-data:www-data /app
 
 VOLUME /app/upload
 

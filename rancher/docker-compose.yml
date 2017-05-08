@@ -1,0 +1,31 @@
+limesurvey:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: unixelias/limesurvey:dev
+  links:
+  - 'mysql:mysql'
+  volumes:
+  - /home/portal/limesurvey/upload:/app/upload
+  stdin_open: true
+lb:
+  ports:
+  - 8085:80/tcp
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - limesurvey:limesurvey
+  stdin_open: true
+mysql:
+  environment:
+    MYSQL_ROOT_PASSWORD: toor
+    MYSQL_DATABASE: pesquisas
+    MYSQL_USER: user
+    MYSQL_PASSWORD: senha
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: mysql:latest
+  volumes:
+  - /home/portal/limesurvey/mysql:/var/lib/mysql
+  stdin_open: true
