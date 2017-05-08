@@ -19,8 +19,7 @@ services:
     volumes:
       - upload:/app/upload
     image:
-      unixelias/limesurvey:dev
-
+      unixelias/limesurvey:latest
 volumes:
   mysql:
   upload:
