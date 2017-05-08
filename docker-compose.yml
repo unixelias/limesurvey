@@ -1,10 +1,11 @@
 version: '2'
 services:
-  mysql:
+  mysqldb:
     image: mysql:latest
     volumes:
       - mysql:/var/lib/mysql
     restart: always
+    hostname: mysqldb
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: pesquisas
@@ -13,7 +14,7 @@ services:
 
   limesurvey:
     links:
-      - mysql
+      - mysqldb:mysqldb
     ports:
       - "8085:80"
     volumes:

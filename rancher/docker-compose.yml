@@ -4,7 +4,7 @@ limesurvey:
   tty: true
   image: unixelias/limesurvey:dev
   links:
-  - 'mysql:mysql'
+  - 'mysqldb:mysqldb'
   volumes:
   - /home/portal/limesurvey/upload:/app/upload
   stdin_open: true
@@ -16,7 +16,7 @@ lb:
   links:
   - limesurvey:limesurvey
   stdin_open: true
-mysql:
+mysqldb:
   environment:
     MYSQL_ROOT_PASSWORD: toor
     MYSQL_DATABASE: pesquisas
@@ -25,6 +25,7 @@ mysql:
   labels:
     io.rancher.container.pull_image: always
   tty: true
+  hostname: mysqldb
   image: mysql:latest
   volumes:
   - /home/portal/limesurvey/mysql:/var/lib/mysql
