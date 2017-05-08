@@ -2,7 +2,7 @@ FROM tutum/lamp
 
 MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
-      Version="0.0.1" \
+      Version="0.0.2" \
       Architecture="x86_64"
 
 # Localização pt-br
@@ -22,7 +22,7 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN curl -o app -L --compressed "http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2" \
+RUN curl -o app http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 | tar -xj \
 	&& chown -R www-data:www-data /app
 
 RUN cp -r /app/upload/* /uploadstruct \
