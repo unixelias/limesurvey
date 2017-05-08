@@ -22,7 +22,7 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN curl -o limesurvey.tar.bz2 -L http://www.limesurvey.org/stable-release?download=2003:limesurvey2631%20170305tarbz2 \
+RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 \
 	&& tar -jxf limesurvey.tar.bz2
 
 RUN mv limesurvey app \
@@ -34,13 +34,17 @@ RUN cp -r /app/upload/* /uploadstruct \
 
 RUN chown www-data:www-data /var/lib/php5
 
+#Mysql externo
+RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf
+
 ADD ldap.php /app/application/config/
 ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
+RUN chown -R www-data:www-data /app
 
 VOLUME /app/upload
 
-EXPOSE 80 3306
+EXPOSE 80
 CMD ["/start.sh"]
