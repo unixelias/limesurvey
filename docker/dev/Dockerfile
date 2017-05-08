@@ -22,11 +22,7 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 \
-	&& tar -jxf limesurvey.tar.bz2
-
-RUN mv limesurvey app \
-	&& mkdir -p /uploadstruct \
+RUN curl -o app -L --compressed "http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2" \
 	&& chown -R www-data:www-data /app
 
 RUN cp -r /app/upload/* /uploadstruct \
