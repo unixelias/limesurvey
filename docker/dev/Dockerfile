@@ -23,7 +23,7 @@ RUN apt-get update \
 RUN rm -rf /app
 
 RUN mkdir app \
-  && curl http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 | tar -xj -C app \
+  && curl http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 | tar -xj -C app/ \
 	&& chown -R www-data:www-data /app
 
 RUN cp -r /app/upload/* /uploadstruct \
