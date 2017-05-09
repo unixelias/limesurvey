@@ -2,7 +2,7 @@ FROM tutum/lamp
 
 MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
-      Version="0.0.2" \
+      Version="0.0.1" \
       Architecture="x86_64"
 
 # Localização pt-br
@@ -22,8 +22,12 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN mkdir app \
-  && curl http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 | tar -xj -C app/ \
+RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey2.65.0+170502.tar.bz2 \
+	&& tar -jxf limesurvey.tar.bz2 \
+  && rm -f limesurvey.tar.bz2
+
+RUN mv limesurvey app \
+	&& mkdir -p /uploadstruct \
 	&& chown -R www-data:www-data /app
 
 RUN cp -r /app/upload/* /uploadstruct \
@@ -39,8 +43,9 @@ ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
-RUN chown -R www-data:www-data /app
-RUN rm -rf /tmp
+RUN chown -R www-data:www-data /app \
+  && rm -rf /tmp
+
 VOLUME /app/upload
 
 EXPOSE 80
