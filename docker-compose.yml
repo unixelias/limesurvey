@@ -1,5 +1,22 @@
 version: '2'
 services:
+  haproxy:
+    image: eeacms/haproxy
+    restart: 'always'
+    depends_on:
+      - limesurvey
+    ports:
+      - 8085:5000
+      - 1937:1936
+    environment:
+      - BACKENDS=limesurvey
+      - BACKENDS_PORT=80
+      - SERVICE_NAMES=limesurvey
+      - DNS_ENABLED=true
+      - STATS_AUTH=admin:admin
+      - COOKIES_ENABLED=true
+
+
   mysqldb:
     image: mysql:latest
     volumes:
@@ -13,10 +30,8 @@ services:
       MYSQL_PASSWORD: senha
 
   limesurvey:
-    links:
-      - mysqldb:mysqldb
-    ports:
-      - "8085:80"
+    depends_on:
+      - mysqldb
     volumes:
       - upload:/app/upload
     image:
