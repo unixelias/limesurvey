@@ -10,5 +10,4 @@ shopt -s extglob
 
 
 #Exclusivo para DEV version
-docker build -t unixelias/limesurvey:dev docker/dev
-
+docker build -t unixelias/limesurvey:dev docker/dev && docker push unixelias/limesurvey:dev

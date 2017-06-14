@@ -7,12 +7,11 @@ matrix:
   fast_finish: true
 before_script:
 - ./linter.sh
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 script:
 - ./build.sh
 after_success:
 - ./repo_build.sh
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-- docker push unixelias/limesurvey:dev;
 env:
   global:
   - secure: h24V/nQM9XHUtp9+XYeyaZ29K1oXmthivYUuoo82h9A3i5uX5071U/EEr6eZNTEtk8IcgNGrHGmvbuLmYF1CqBaMMRNhleTeDfuPQRAQRI9dhcWEnoGa7ugHhpQjnCIolg1jhq6RlnPA2yhSfH0Ecx7XNaFSqN5BQK7/0O4xhJrMeMpGmYtpgA/b1N8WN35Hpt02zpqwvRPt/sRg4lK+6JTezfAe+UGA18ltIF5ONHe1RwOfcVWD8JQNbh1aHuC0pausWgVit+4kVQV1OeW1JC8WwKkVk+ncjkYwcAElqCrdLaF/Khw+0RAb6YAJFF4sTtxO+vH47VZEkNcbhB30Mt92hheJZLT9LaqoJz2w0A/JN1o6CE5xZFiX09D5mDwdKCo5G+CPc4uqPDJWa4Zo3BZ4I+qlecsNpocxSsi/+gpl6k+iloNIr5zixf6l26pCHVM9SEw+4AUkAw4vR5ksvxa2heD8xY58By/GgINwb+cdhlvgj93mXfJK0O++kXdOtERJJHeF3LjfufUXqF3PpOwXh0kKrsanhUYHASKPlc0Qy09l2ZaInZlyMbxjrb/wmrztZvce+SO87dWoKaex1/uKVVwUJU/dIn4PP1asGNmAcnPRGC/tZAu0f91mvbe+73odFYNWIgewi97EPNRnwBvH+DKDK15gcY9kQzUF96E=
