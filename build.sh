@@ -1,14 +1,19 @@
 #!/bin/bash
 shopt -s extglob
 
+last=""
+
 for i in $( ls docker); do
   case "$i" in
-       *-test )  ;;
-       * ) docker build -t unixelias/limesurvey:$i docker/$i && docker push unixelias/limesurvey:$i ;;
+       *-test|dev )  ;;
+       * ) docker build -t unixelias/limesurvey:$i docker/$i \
+            && docker push unixelias/limesurvey:$i \
+            && last=$i \
+            ;;
   esac
 done
 
-docker tag unixelias/limesurvey:2.72.4 unixelias/limesurvey:latest && docker push unixelias/limesurvey:latest
+docker tag unixelias/limesurvey:$last unixelias/limesurvey:latest && docker push unixelias/limesurvey:latest
 
 #Exclusivo para DEV version
 #docker build -t unixelias/limesurvey:dev docker/dev
