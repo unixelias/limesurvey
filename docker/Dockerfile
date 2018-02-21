@@ -8,16 +8,16 @@ ARG VCS_BRANCH
 ARG LS_VERSION
 
 LABEL Name="LimeSurvey on Docker" \
-	Version=$VCS_BRANCH \
+	Version=${VCS_BRANCH} \
 	Architecture="x86_64" \
-	org.label-schema.build-date=$BUILD_DATE \
+	org.label-schema.build-date=${BUILD_DATE} \
 	org.label-schema.name="LimeSurvey on Docker" \
 	org.label-schema.description="LimeSurvey on Docker" \
-	org.label-schema.vcs-ref=$VCS_REF \
-	org.label-schema.vcs-url="https://github.com/unixelias/docker-lamp" \
+	org.label-schema.vcs-ref=${VCS_REF} \
+	org.label-schema.vcs-url="https://github.com/unixelias/limesurvey" \
 	org.label-schema.vendor="Elias Alves at UFVJM" \
-	org.label-schema.version=$VCS_BRANCH \
-	org.label-schema.version=$LS_VERSION \
+	org.label-schema.version=${LS_VERSION} \
+	org.label-schema.version=${VCS_BRANCH} \
 	org.label-schema.version="latest" \
 	org.label-schema.schema-version="1.0" \
 	org.label-schema.docker.cmd="docker run -d --name limesurvey -v mysql:/var/lib/mysql -p 80:80 unixelias/limesurvey:latest"
@@ -35,15 +35,16 @@ RUN apt-get update \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* \
 	&& php5enmod imap \
 	&& php5enmod ldap \
-	&& php5enmod curl
-
-RUN rm -rf /app
+	&& php5enmod curl \
+	&& rm -rf /app
 
 RUN curl -o limesurvey.tar.gz -L https://github.com/LimeSurvey/LimeSurvey/archive/${LS_VERSION}.tar.gz \
 	&& mkdir limetmp \
 	&& tar -zxf limesurvey.tar.gz -C limetmp \
+	&& rm limesurvey.tar.gz \
 	&& LIME_TAG=$(ls limetmp) \
 	&& mv limetmp/$LIME_TAG app \
+	&& rm -rf limetmp \
 	&& mkdir -p /uploadstruct \
 	&& chown -R www-data:www-data /app \
 	&& cp -r /app/upload/* /uploadstruct \
