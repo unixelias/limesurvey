@@ -17,9 +17,10 @@ LABEL Name="LimeSurvey on Docker" \
 	org.label-schema.vcs-url="https://github.com/unixelias/docker-lamp" \
 	org.label-schema.vendor="Elias Alves at UFVJM" \
 	org.label-schema.version=$VCS_BRANCH \
-	org.label-schema.version=$LS-VERSION \
-	org.label-schema.version="dev" \
-	org.label-schema.schema-version="1.0"
+	org.label-schema.version=$LS_VERSION \
+	org.label-schema.version="latest" \
+	org.label-schema.schema-version="1.0" \
+	org.label-schema.docker.cmd="docker run -d --name limesurvey -v mysql:/var/lib/mysql -p 80:80 unixelias/limesurvey:latest"
 
 # Localização pt-br
 RUN locale-gen pt_BR \
@@ -31,7 +32,7 @@ RUN locale-gen pt_BR \
 RUN apt-get update \
 	&& apt-get upgrade -q -y \
 	&& apt-get install -q -y curl php5-gd php5-ldap php5-imap php5-curl sendmail \
-	&& apt-get clean \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/* \
 	&& php5enmod imap \
 	&& php5enmod ldap \
 	&& php5enmod curl
@@ -62,4 +63,5 @@ RUN chown -R www-data:www-data /app
 VOLUME /app/upload
 
 EXPOSE 80
+
 CMD ["/start.sh"]
