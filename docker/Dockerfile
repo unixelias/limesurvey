@@ -5,7 +5,7 @@ MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VCS_BRANCH
-ARG LSVERSION
+ARG LS_VERSION
 
 LABEL Name="LimeSurvey on Docker" \
 	Version=$VCS_BRANCH \
@@ -39,7 +39,7 @@ RUN apt-get update \
 RUN rm -rf /app
 
 RUN curl -o limesurvey.tar.gz -L https://github.com/LimeSurvey/LimeSurvey/archive/${LS_VERSION}.tar.gz \
-	&& tar -vzxf limesurvey.tar.gz
+	&& tar -zxf limesurvey.tar.gz
 
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \

@@ -1,3 +1,7 @@
+## Give me a beer :beer: :wink:
+
+[![](donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CFCUUWKMXVT5L "Donate")
+
 LimeSurvey
 ==========
 
