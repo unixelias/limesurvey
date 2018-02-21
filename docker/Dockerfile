@@ -1,9 +1,25 @@
 FROM tutum/lamp
 
 MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
-LABEL Name="Modelo LimeSurvey para implementação no Portal da UFVJM" \
-      Version="0.0.1" \
-      Architecture="x86_64"
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_BRANCH
+ARG LSVERSION
+
+LABEL Name="LimeSurvey on Docker" \
+	Version=$VCS_BRANCH \
+	Architecture="x86_64" \
+	org.label-schema.build-date=$BUILD_DATE \
+	org.label-schema.name="LimeSurvey on Docker" \
+	org.label-schema.description="LimeSurvey on Docker" \
+	org.label-schema.vcs-ref=$VCS_REF \
+	org.label-schema.vcs-url="https://github.com/unixelias/docker-lamp" \
+	org.label-schema.vendor="Elias Alves at UFVJM" \
+	org.label-schema.version=$VCS_BRANCH \
+	org.label-schema.version=$LS-VERSION \
+	org.label-schema.version="dev" \
+	org.label-schema.schema-version="1.0"
 
 # Localização pt-br
 RUN locale-gen pt_BR \
@@ -22,8 +38,8 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey2.72.4+171110.tar.bz2 \
-	&& tar -jxf limesurvey.tar.bz2
+RUN curl -o limesurvey.tar.gz -L https://github.com/LimeSurvey/LimeSurvey/archive/${LS_VERSION}.tar.gz \
+	&& tar -vzxf limesurvey.tar.gz
 
 RUN mv limesurvey app \
 	&& mkdir -p /uploadstruct \
@@ -34,13 +50,17 @@ RUN cp -r /app/upload/* /uploadstruct \
 
 RUN chown www-data:www-data /var/lib/php5
 
+#Mysql externo
+RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf
+
 ADD ldap.php /app/application/config/
 ADD apache_default /etc/apache2/sites-available/000-default.conf
 ADD start.sh /
 RUN chmod +x /start.sh
 
+RUN chown -R www-data:www-data /app
 
 VOLUME /app/upload
 
-EXPOSE 80 3306
+EXPOSE 80
 CMD ["/start.sh"]

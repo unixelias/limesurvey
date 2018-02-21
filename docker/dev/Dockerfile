@@ -22,7 +22,7 @@ RUN apt-get update \
 
 RUN rm -rf /app
 
-RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey2.72.4+171110.tar.bz2 \
+RUN curl -o limesurvey.tar.bz2 -L http://download.limesurvey.org/latest-stable-release/limesurvey3.4.1+180221.tar.bz2 \
 	&& tar -jxf limesurvey.tar.bz2
 
 RUN mv limesurvey app \
