@@ -39,16 +39,15 @@ RUN apt-get update \
 RUN rm -rf /app
 
 RUN curl -o limesurvey.tar.gz -L https://github.com/LimeSurvey/LimeSurvey/archive/${LS_VERSION}.tar.gz \
-	&& tar -zxf limesurvey.tar.gz
-
-RUN mv limesurvey app \
+	&& mkdir limetmp \
+	&& tar -zxf limesurvey.tar.gz -C limetmp \
+	&& LIME_TAG=$(ls limetmp) \
+	&& mv limetmp/$LIME_TAG app \
 	&& mkdir -p /uploadstruct \
-	&& chown -R www-data:www-data /app
-
-RUN cp -r /app/upload/* /uploadstruct \
-	&& chown -R www-data:www-data /uploadstruct
-
-RUN chown www-data:www-data /var/lib/php5
+	&& chown -R www-data:www-data /app \
+	&& cp -r /app/upload/* /uploadstruct \
+	&& chown -R www-data:www-data /uploadstruct \
+	&& chown www-data:www-data /var/lib/php5
 
 #Mysql externo
 RUN rm /etc/supervisor/conf.d/supervisord-mysqld.conf
